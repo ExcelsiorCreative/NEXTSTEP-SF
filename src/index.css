@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300..1000;1,6..12,300..1000&display=swap');
+@import "tailwindcss";
+
+/* Global Nunito Sans Font Enforcement */
+html,
+body,
+#root,
+*,
+*::before,
+*::after {
+  font-family: 'Nunito Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #dceaf2;
+  color: #000000;
+}
+
+/* Zuckerberg San Francisco General / UCSF Ward 86 Liquid Glass Theme with HIGH CONTRAST */
+.liquid-dashboard {
+  --zsfgh-navy: #002b49;
+  --zsfgh-teal: #007c8a;
+  --zsfgh-blue: #005a9c;
+  --zsfgh-amber: #b45309;
+  --zsfgh-red: #c41230;
+
+  /* High opacity white glass for 100% crystal-clear readability */
+  --glass-tint: rgba(255, 255, 255, 0.94);
+  --glass-edge: rgba(0, 43, 73, 0.18);
+  --glass-shadow: 0 10px 25px rgba(0, 43, 73, 0.12), 0 2px 6px rgba(0, 124, 138, 0.08);
+  --glass-highlight: inset 1px 1px 1px rgba(255, 255, 255, 1), inset -1px -1px 1px rgba(0, 0, 0, 0.05);
+
+  background: radial-gradient(ellipse at 10% 10%, #a4cded 0, transparent 50%),
+    radial-gradient(ellipse at 85% 35%, #b2e8e3 0, transparent 48%),
+    radial-gradient(ellipse at 30% 95%, #aee3dc 0, transparent 50%),
+    #dceaf2;
+  isolation: isolate;
+  color-scheme: light;
+}
+
+.liquid-dashboard.dark {
+  --glass-tint: rgba(0, 24, 43, 0.94);
+  --glass-edge: rgba(255, 255, 255, 0.25);
+  --glass-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 124, 138, 0.3);
+  --glass-highlight: inset 1px 1px 1px rgba(255, 255, 255, 0.2), inset -1px -1px 1px rgba(0, 0, 0, 0.3);
+
+  background: radial-gradient(ellipse at 10% 10%, #001729 0, transparent 50%),
+    radial-gradient(ellipse at 85% 35%, #002e35 0, transparent 48%),
+    radial-gradient(ellipse at 30% 95%, #002429 0, transparent 50%),
+    #00111d;
+  color-scheme: dark;
+}
+
+.liquid-dashboard .dashboard-shell,
+.liquid-dashboard .dashboard-main {
+  background: transparent;
+}
+
+/* Liquid Glass Surface */
+.liquid-dashboard .glass-surface {
+  position: relative;
+  isolation: isolate;
+  background: var(--glass-tint);
+  border: 2px solid var(--glass-edge);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
+  border-radius: 24px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.liquid-dashboard .glass-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  backdrop-filter: blur(8px) saturate(140%);
+  filter: var(--glass-filter);
+  clip-path: inset(0 round 24px);
+}
+
+.liquid-dashboard .glass-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: var(--glass-highlight);
+}
+
+.liquid-dashboard .glass-sidebar {
+  position: sticky;
+  margin: 16px 0 16px 16px;
+  top: 80px;
+  height: calc(100dvh - 100px);
+  padding-bottom: 24px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.liquid-dashboard .glass-nav {
+  border-radius: 16px;
+}
+
+.liquid-dashboard .glass-nav[aria-pressed="true"] {
+  background: #002b49;
+  border: 2px solid #002b49;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(0, 43, 73, 0.25);
+}
+
+.liquid-dashboard .glass-nav[aria-pressed="true"] * {
+  color: #ffffff !important;
+}
+
+.liquid-dashboard .glass-button {
+  min-width: 44px;
+  min-height: 44px;
+  background: var(--glass-tint);
+  border: 2px solid var(--glass-edge);
+  border-radius: 16px;
+  box-shadow: var(--glass-highlight), 0 3px 9px rgba(0, 0, 0, 0.08);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.liquid-dashboard button {
+  touch-action: manipulation;
+}
+
+@media (hover: hover) {
+  .liquid-dashboard .glass-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 32px rgba(0, 43, 73, 0.18), var(--glass-highlight);
+  }
+}
+
+/* ========================================================= */
+/* STRICT ACCESSIBILITY & CONTRAST RULES                     */
+/* ========================================================= */
+
+/* 1. All text on light surfaces is CRISP DEEP BLACK (#000000) */
+.liquid-dashboard:not(.dark) h1,
+.liquid-dashboard:not(.dark) h2,
+.liquid-dashboard:not(.dark) h3,
+.liquid-dashboard:not(.dark) h4,
+.liquid-dashboard:not(.dark) h5,
+.liquid-dashboard:not(.dark) h6,
+.liquid-dashboard:not(.dark) p,
+.liquid-dashboard:not(.dark) label,
+.liquid-dashboard:not(.dark) input,
+.liquid-dashboard:not(.dark) select,
+.liquid-dashboard:not(.dark) textarea {
+  color: #000000 !important;
+  opacity: 1 !important;
+}
+
+/* 2. Any button or badge with dark background MUST HAVE PURE CRISP WHITE TEXT */
+.btn-dark,
+button[class*="bg-\[#002b49\]"],
+button[class*="bg-\[#007c8a\]"],
+button[class*="bg-\[#c41230\]"],
+button[class*="bg-\[#005a9c\]"],
+button[class*="bg-emerald-700"],
+button[class*="bg-emerald-600"],
+button[class*="bg-blue-600"],
+a[class*="bg-\[#002b49\]"],
+a[class*="bg-\[#007c8a\]"],
+a[class*="bg-\[#c41230\]"],
+a[class*="bg-\[#005a9c\]"],
+a[class*="bg-emerald-700"],
+a[class*="bg-emerald-600"],
+a[class*="bg-blue-600"],
+.badge-white-text {
+  color: #ffffff !important;
+}
+
+/* Child text and SVG icons inside dark buttons/links are crisp white */
+button[class*="bg-\[#002b49\]"] *,
+button[class*="bg-\[#007c8a\]"] *,
+button[class*="bg-\[#c41230\]"] *,
+button[class*="bg-\[#005a9c\]"] *,
+button[class*="bg-emerald-700"] *,
+button[class*="bg-emerald-600"] *,
+button[class*="bg-blue-600"] *,
+a[class*="bg-\[#002b49\]"] *,
+a[class*="bg-\[#007c8a\]"] *,
+a[class*="bg-\[#c41230\]"] *,
+a[class*="bg-\[#005a9c\]"] *,
+a[class*="bg-emerald-700"] *,
+a[class*="bg-emerald-600"] *,
+a[class*="bg-blue-600"] * {
+  color: #ffffff !important;
+}
+
+/* In dark mode, all surface text is crisp white or bright teal */
+.liquid-dashboard.dark h1,
+.liquid-dashboard.dark h2,
+.liquid-dashboard.dark h3,
+.liquid-dashboard.dark h4,
+.liquid-dashboard.dark p,
+.liquid-dashboard.dark label,
+.liquid-dashboard.dark span:not([class*="bg-"]) {
+  color: #ffffff !important;
+}
+
+@media (max-width: 1023px) {
+  .liquid-dashboard .glass-sidebar {
+    width: 72px;
+    margin: 8px 0 8px 8px;
+    top: 72px;
+    height: calc(100dvh - 80px);
+  }
+}

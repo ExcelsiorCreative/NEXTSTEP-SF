@@ -1,0 +1,6 @@
+{
+  "name": "Next Step SF - San Francisco HIV Service Navigator",
+  "description": "Bilingual San Francisco service and benefits navigator for people living with HIV, featuring Ryan White, ADAP, clinical care, housing, food, and verified resource search.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
